@@ -12,12 +12,12 @@ const eventSchema = new Schema({
   dessert: Boolean,
   drink: Boolean,
   restrictions: String,
-  menu
+  menu: { type: Schema.Types.ObjectId, ref: 'Dish' }
 
 },{
   timestamps: true,
 })
 
-const Event = mongoose.model('Event', profileSchema)
+const Event = mongoose.model('Event', eventSchema)
 
 export { Event }
