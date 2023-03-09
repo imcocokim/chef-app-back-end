@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const menuSchema = new Schema({
+const dishSchema = new Schema({
   title: String,
   description: String,
   filter: String,
@@ -13,6 +13,6 @@ const menuSchema = new Schema({
   timestamps: true,
 })
 
-const Menu = mongoose.model('Menu', profileSchema)
+const Dish = mongoose.model('Dish', dishSchema)
 
-export { Menu }
+export { Dish }

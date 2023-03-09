@@ -12,6 +12,7 @@ const eventSchema = new Schema({
   dessert: Boolean,
   drink: Boolean,
   restrictions: String,
+  menu
 
 },{
   timestamps: true,
