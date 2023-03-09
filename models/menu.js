@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const menuSchema = new Schema({
   title: String,
+  description: String,
   filter: String,
   ingredients: String,
   recipe: String,
