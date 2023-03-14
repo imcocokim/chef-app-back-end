@@ -12,6 +12,7 @@ const eventSchema = new Schema({
   dessert: Boolean,
   drink: Boolean,
   restrictions: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
+  notes: String,
   menu: [{ type: Schema.Types.ObjectId, ref: 'Dish' }]
 
 },{
