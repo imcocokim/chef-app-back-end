@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const dishSchema = new Schema({
   title: String,
   description: String,
-  filter: String,
+  filter: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
   ingredients: String,
   recipe: String,
   notes: String
