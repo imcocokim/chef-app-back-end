@@ -4,6 +4,8 @@ const Schema = mongoose.Schema
 
 const filterSchema = new Schema({
   title: String
+},{
+  timestamps: true,
 })
 
 const Filter = mongoose.model('Filter', filterSchema)
