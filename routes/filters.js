@@ -10,5 +10,6 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, filtersCtrl.create)
+router.get('/', checkAuth, filtersCtrl.index)
 
 export { router }

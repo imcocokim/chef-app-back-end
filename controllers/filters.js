@@ -8,8 +8,18 @@ const create = async (req, res) => {
     res.status(500).json(err)
   }
 }
+const index = async (req, res) => {
+  try {
+    const filter = await Filter.find({})
+    res.status(201).json(filter)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 
 
 export {
   create,
+  index
 }
