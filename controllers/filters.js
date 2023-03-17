@@ -17,9 +17,22 @@ const index = async (req, res) => {
   }
 }
 
+function deleteOne(req, res){
+  Filter.findByIdAndDelete(req.params.id)
+  .then(deletedFilter => {
+    res.json(deletedFilter)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
+
 
 
 export {
   create,
-  index
+  index,
+  deleteOne as delete,
 }
