@@ -8,6 +8,7 @@ const create = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
 const index = async (req, res) => {
   try {
     const filter = await Filter.find({})
@@ -16,17 +17,28 @@ const index = async (req, res) => {
     res.status(500).json(err)
   }
 }
-
-function deleteOne(req, res){
-  Filter.findByIdAndDelete(req.params.id)
-  .then(deletedFilter => {
-    res.json(deletedFilter)
-  })
-  .catch(err => {
-    console.log(err)
+const deleteOne = async (req, res) => {
+  try {
+    Filter.findByIdAndDelete(req.params.id)
+    .then(deletedFilter => {
+      res.json(deletedFilter)
+    })
+  } catch (err) {
     res.status(500).json(err)
-  })
+  }
 }
+
+// function deleteOne(req, res){
+//   Filter.findByIdAndDelete(req.params.id)
+//   .then(deletedFilter => {
+//     res.json(deletedFilter)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//     res.status(500).json(err)
+//   })
+// }
+
 
 
 
