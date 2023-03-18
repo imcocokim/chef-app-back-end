@@ -27,6 +27,17 @@ const deleteOne = async (req, res) => {
     res.status(500).json(err)
   }
 }
+const update = async (req, res) => {
+  try {
+    console.log(req.body)
+    Filter.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(updatedFilter => {
+      res.json(updatedFilter)
+    })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
 
 // function deleteOne(req, res){
 //   Filter.findByIdAndDelete(req.params.id)
@@ -47,4 +58,5 @@ export {
   create,
   index,
   deleteOne as delete,
+  update
 }
