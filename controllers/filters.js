@@ -17,6 +17,7 @@ const index = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
 const deleteOne = async (req, res) => {
   try {
     Filter.findByIdAndDelete(req.params.id)
@@ -27,6 +28,7 @@ const deleteOne = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
 const update = async (req, res) => {
   try {
     console.log(req.body)
@@ -39,6 +41,15 @@ const update = async (req, res) => {
   }
 }
 
+
+export {
+  create,
+  index,
+  deleteOne as delete,
+  update
+}
+
+
 // function deleteOne(req, res){
 //   Filter.findByIdAndDelete(req.params.id)
 //   .then(deletedFilter => {
@@ -49,14 +60,3 @@ const update = async (req, res) => {
 //     res.status(500).json(err)
 //   })
 // }
-
-
-
-
-
-export {
-  create,
-  index,
-  deleteOne as delete,
-  update
-}
