@@ -31,7 +31,6 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    console.log(req.body)
     Filter.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(updatedFilter => {
       res.json(updatedFilter)

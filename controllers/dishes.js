@@ -29,9 +29,23 @@ const deleteOne = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    Dish.findById(req.params.id)
+    .then(dish => {
+      Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
+      .then (updatedDish => {
+        res.json(updatedDish)
+      })
+    })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 export {
   create,
   index,
   deleteOne as delete,
-
+  update
 }
