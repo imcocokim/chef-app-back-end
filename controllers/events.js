@@ -10,6 +10,15 @@ const create = async (req, res) => {
   }
 }
 
+const index = async (req, res) => {
+  try {
+    const event = await Event.find({})
+    res.status(201).json(event)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 const deleteOne= async (req, res) => {
   try {
     Event.findByIdAndDelete(req.params.id)
@@ -25,4 +34,5 @@ const deleteOne= async (req, res) => {
 export {
   create,
   deleteOne as delete,
+  index
 }

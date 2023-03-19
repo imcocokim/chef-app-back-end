@@ -10,7 +10,7 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, eventsCtrl.create)
-// router.get('/', checkAuth, dishesCtrl.index)
+router.get('/', checkAuth, eventsCtrl.index)
 // router.put('/:id', checkAuth, dishesCtrl.update)
 router.delete('/:id', checkAuth, eventsCtrl.delete)
 
