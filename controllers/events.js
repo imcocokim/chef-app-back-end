@@ -13,6 +13,8 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const event = await Event.find({})
+    .populate('restrictions')
+    .populate('menu')
     res.status(201).json(event)
   } catch (err) {
     res.status(500).json(err)
