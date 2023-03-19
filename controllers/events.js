@@ -21,7 +21,7 @@ const index = async (req, res) => {
   }
 }
 
-const deleteOne= async (req, res) => {
+const deleteOne = async (req, res) => {
   try {
     Event.findByIdAndDelete(req.params.id)
     .then(deletedEvent => {
@@ -32,9 +32,22 @@ const deleteOne= async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    Event.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    .populate('restrictions')
+    .populate('menu')
+    .then (updatedEvent => {
+      res.json(updatedEvent)
+    })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
 
 export {
   create,
   deleteOne as delete,
-  index
+  index,
+  update
 }

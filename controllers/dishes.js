@@ -32,13 +32,10 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    Dish.findById(req.params.id)
-    .then(dish => {
-      Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
-      .populate('filter')
-      .then (updatedDish => {
-        res.json(updatedDish)
-      })
+    Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    .populate('filter')
+    .then (updatedDish => {
+      res.json(updatedDish)
     })
   } catch (err) {
     res.status(500).json(err)
