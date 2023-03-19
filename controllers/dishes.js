@@ -12,6 +12,7 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const dish = await Dish.find({})
+    .populate('filter')
     res.status(201).json(dish)
   } catch (err) {
     res.status(500).json(err)
@@ -34,6 +35,7 @@ const update = async (req, res) => {
     Dish.findById(req.params.id)
     .then(dish => {
       Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
+      .populate('filter')
       .then (updatedDish => {
         res.json(updatedDish)
       })
