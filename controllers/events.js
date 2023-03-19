@@ -10,7 +10,19 @@ const create = async (req, res) => {
   }
 }
 
+const deleteOne= async (req, res) => {
+  try {
+    Event.findByIdAndDelete(req.params.id)
+    .then(deletedEvent => {
+      res.json(deletedEvent)
+    })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 
 export {
   create,
+  deleteOne as delete,
 }
