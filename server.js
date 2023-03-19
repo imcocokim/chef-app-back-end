@@ -13,6 +13,7 @@ import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as filtersRouter } from './routes/filters.js'
 import { router as dishesRouter } from './routes/dishes.js'
+import { router as eventsRouter } from './routes/events.js'
 
 // create the express app
 const app = express()
@@ -28,6 +29,7 @@ app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/filters', filtersRouter)
 app.use('/api/dishes', dishesRouter)
+app.use('/api/events', eventsRouter)
 
 // handle 404 errors
 app.use(function (req, res, next) {
