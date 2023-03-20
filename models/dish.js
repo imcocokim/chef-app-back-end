@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const dishSchema = new Schema({
-  isFavorite: {type: Boolean, required: true},
+  isFavorite: {type: Boolean, default: false},
   photo: String,
   title: {type: String, required: true},
   cost: String,
