@@ -6,6 +6,7 @@ const dishSchema = new Schema({
   isFavorite: {type: Boolean, required: true},
   photo: String,
   title: {type: String, required: true},
+  cost: String,
   description: String,
   yield: String,
   prep: String,
