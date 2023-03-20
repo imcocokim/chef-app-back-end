@@ -8,6 +8,7 @@ const eventSchema = new Schema({
   time: {type: String, required: true},
   location: String,
   details: String,
+  format: String,
   courses: {type: Number, required: true},
   dessert: {type: Boolean, default: false},
   drink: {type: Boolean, default: false},
