@@ -1,8 +1,15 @@
 import { Filter } from '../models/filter.js'
+import { Profile } from '../models/profile.js'
+
 
 const create = async (req, res) => {
   try {
+    req.body.author = req.user.profile
     const filter = await Filter.create(req.body)
+    await Profile.updateOne(
+      {_id: req.user.profile},
+      {$push: {filters: filter}}
+    )
     res.status(201).json(filter)
   } catch (err) {
     res.status(500).json(err)
@@ -12,6 +19,7 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const filter = await Filter.find({})
+    .populate('author')
     res.status(201).json(filter)
   } catch (err) {
     res.status(500).json(err)
