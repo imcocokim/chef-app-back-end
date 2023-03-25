@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const filterSchema = new Schema({
-  title: String
+  title: String,
+  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
 },{
   timestamps: true,
 })

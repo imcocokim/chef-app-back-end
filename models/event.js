@@ -15,7 +15,8 @@ const eventSchema = new Schema({
   restrictions: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
   notes: String,
   menu: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
-  isArchived: {type: Boolean, default: false}
+  isArchived: {type: Boolean, default: false},
+  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
 
 },{
   timestamps: true,

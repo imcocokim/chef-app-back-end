@@ -13,7 +13,8 @@ const dishSchema = new Schema({
   filter: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
   ingredients: String,
   directions: String,
-  notes: String
+  notes: String,
+  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
 },{
   timestamps: true,
 })
