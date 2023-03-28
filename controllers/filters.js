@@ -19,7 +19,7 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const filter = await Filter.find({})
-    .populate('author')
+    .populate(['events', 'author', 'dishes'])
     res.status(201).json(filter)
   } catch (err) {
     res.status(500).json(err)
@@ -28,10 +28,11 @@ const index = async (req, res) => {
 
 const deleteOne = async (req, res) => {
   try {
-    Filter.findByIdAndDelete(req.params.id)
-    .then(deletedFilter => {
-      res.json(deletedFilter)
-    })
+    const filter = await Filter.findById(req.params.id)
+    .populate(['events', 'author', 'dishes'])
+    await filter.remove()
+    
+    res.status(200).json({ message: 'Filter and related documents deleted' })
   } catch (err) {
     res.status(500).json(err)
   }
@@ -47,6 +48,8 @@ const update = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
+
 
 
 export {
