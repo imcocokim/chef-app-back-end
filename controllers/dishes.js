@@ -62,13 +62,39 @@ const updateFilter = async (req, res) => {
     res.status(500).json(err)
   }
 }
+const deleteFilter = async (req, res) => {
+  try {
+    const {dishId, filterId } = req.params
+
+    const updatedDish = await Dish.findOneAndUpdate(
+      {_id: dishId},
+      { $pull: { filter: filterId }},
+      { new:true }
+    )
+    .populate('filter')
+
+    const updatedFilter = await Filter.findOneAndUpdate(
+      { _id: filterId },
+      { $pull: { dishes: dishId }},
+      { new: true}
+    )
+    .populate('dishes')
+
+    res.json({ updatedDish, updatedFilter})
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+
 
 export {
   create,
   index,
   deleteOne as delete,
   update, 
-  updateFilter
+  updateFilter,
+  deleteFilter
 }
 
 

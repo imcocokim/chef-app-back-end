@@ -13,6 +13,7 @@ router.post('/', checkAuth, dishesCtrl.create)
 router.get('/', checkAuth, dishesCtrl.index)
 router.put('/:id', checkAuth, dishesCtrl.update)
 router.put('/:id/filter', checkAuth, dishesCtrl.updateFilter)
+router.delete('/:dishId/filter/:filterId', checkAuth, dishesCtrl.deleteFilter)
 router.delete('/:id', checkAuth, dishesCtrl.delete)
 
 export { router }
