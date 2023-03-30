@@ -1,4 +1,5 @@
 import { Dish } from '../models/dish.js'
+import { Filter } from '../models/filter.js'
 
 const create = async (req, res) => {
   try {
@@ -47,8 +48,17 @@ const updateFilter = async (req, res) => {
       { new: true }
     )
     .populate('filter')
+    
+    const filter = await Filter.findById(req.body.filter)
+
+    if (!filter.dishes.includes(updatedDish._id)) {
+      filter.dishes.push(updatedDish._id)
+      await filter.save()
+    }
+
     res.json(updatedDish)
   } catch (err) {
+    console.error(err)
     res.status(500).json(err)
   }
 }
