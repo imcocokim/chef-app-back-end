@@ -62,6 +62,7 @@ const updateFilter = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
 const deleteFilter = async (req, res) => {
   try {
     const {dishId, filterId } = req.params
@@ -100,3 +101,5 @@ export {
 
 // $addToSet opterator adds a value to an array unless the value is already present, in which case $addToSet does nothing to the array. Link to doc:
 // https://www.mongodb.com/docs/manual/reference/operator/update/addToSet/
+
+// deleteFilter: Needed to find a way that when I delete the filter on the specific dish, the filter will be taken out of the array on the dish model AND the dish will be taken out of the array from the filter model.
