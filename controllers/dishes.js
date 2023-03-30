@@ -50,6 +50,7 @@ const updateFilter = async (req, res) => {
       { $addToSet: { filter: req.body.filter } },
       { new: true }
     )
+    .populate('filter')
     res.json(updatedDish)
   } catch (err) {
     res.status(500).json(err)
