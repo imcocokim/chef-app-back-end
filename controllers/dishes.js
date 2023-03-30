@@ -64,3 +64,7 @@ export {
   update, 
   updateFilter
 }
+
+
+// $addToSet opterator adds a value to an array unless the value is already present, in which case $addToSet does nothing to the array. Link to doc:
+// https://www.mongodb.com/docs/manual/reference/operator/update/addToSet/
