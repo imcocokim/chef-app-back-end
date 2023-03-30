@@ -5,6 +5,14 @@ const create = async (req, res) => {
   try {
     req.body.author = req.user.profile
     const dish = await Dish.create(req.body)
+
+    const filter = await Filter.findById(req.body.filter)
+
+    if (!filter.dishes.includes(dish._id)) {
+      filter.dishes.push(dish._id)
+      await filter.save()
+    }
+
     res.status(201).json(dish)
   } catch (err) {
     res.status(500).json(err)
@@ -70,7 +78,7 @@ const deleteFilter = async (req, res) => {
     const updatedDish = await Dish.findOneAndUpdate(
       {_id: dishId},
       { $pull: { filter: filterId }},
-      { new:true }
+      { new: true }
     )
     .populate('filter')
 

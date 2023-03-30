@@ -10,6 +10,7 @@ const create = async (req, res) => {
       {_id: req.user.profile},
       {$push: {filters: filter}}
     )
+    
     res.status(201).json(filter)
   } catch (err) {
     res.status(500).json(err)
@@ -20,7 +21,8 @@ const index = async (req, res) => {
   try {
     const filter = await Filter.find({})
     .populate(['events', 'author', 'dishes'])
-    res.status(201).json(filter)
+
+    res.status(200).json(filter)
   } catch (err) {
     res.status(500).json(err)
   }
@@ -40,10 +42,9 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    Filter.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(updatedFilter => {
-      res.json(updatedFilter)
-    })
+    const updatedFilter = await Filter.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    
+    res.status(200).json(updatedFilter)
   } catch (err) {
     res.status(500).json(err)
   }
