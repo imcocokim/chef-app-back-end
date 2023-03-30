@@ -33,11 +33,9 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .populate('filter')
-    .then (updatedDish => {
-      res.json(updatedDish)
-    })
+    res.json(updatedDish)
   } catch (err) {
     res.status(500).json(err)
   }
