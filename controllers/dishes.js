@@ -22,10 +22,8 @@ const index = async (req, res) => {
 
 const deleteOne = async (req, res) => {
   try {
-    Dish.findByIdAndDelete(req.params.id)
-    .then (deletedDish => {
-      res.json(deletedDish)
-    })
+    const deletedDish = await Dish.findByIdAndDelete(req.params.id)
+    res.json(deletedDish)
   } catch (err) {
     res.status(500).json(err)
   }
