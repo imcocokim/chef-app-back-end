@@ -45,11 +45,11 @@ const update = async (req, res) => {
 
 const updateFilter = async (req, res) => {
   try {
-    const { filter } = req.body
-    const dish = await Dish.findById(req.params.id)
-    .populate('filter')
-    dish.filter.push(filter)
-    const updatedDish = await dish.save()
+    const updatedDish = await Dish.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { filter: req.body.filter } },
+      { new: true }
+    )
     res.json(updatedDish)
   } catch (err) {
     res.status(500).json(err)
