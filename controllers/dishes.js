@@ -6,7 +6,7 @@ const create = async (req, res) => {
     req.body.author = req.user.profile
     const dish = await Dish.create(req.body)
 
-    const filter = await Filter.findById(req.body.filter)
+    const filter = await Filter.findById(req.body.filters)
 
     if (!filter.dishes.includes(dish._id)) {
       filter.dishes.push(dish._id)
@@ -22,7 +22,7 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const dish = await Dish.find({})
-    .populate('filter')
+    .populate('filters')
 
     res.status(200).json(dish)
   } catch (err) {
@@ -43,9 +43,9 @@ const deleteOne = async (req, res) => {
 const update = async (req, res) => {
   try {
     const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    .populate('filter')
+    .populate('filters')
 
-    res.status(200).json(updatedDish)
+    res.status(200).json({message: 'Dish updated', updatedDish})
   } catch (err) {
     res.status(500).json(err)
   }
@@ -55,12 +55,12 @@ const updateFilter = async (req, res) => {
   try {
     const updatedDish = await Dish.findByIdAndUpdate(
       req.params.id,
-      { $addToSet: { filter: req.body.filter } },
+      { $addToSet: { filters: req.body.filters } },
       { new: true }
     )
-    .populate('filter')
+    .populate('filters')
     
-    const filter = await Filter.findById(req.body.filter)
+    const filter = await Filter.findById(req.body.filters)
 
     if (!filter.dishes.includes(updatedDish._id)) {
       filter.dishes.push(updatedDish._id)
@@ -80,7 +80,7 @@ const deleteFilter = async (req, res) => {
 
     const updatedDish = await Dish.findOneAndUpdate(
       {_id: dishId},
-      { $pull: { filter: filterId }},
+      { $pull: { filters: filterId }},
       { new: true }
     )
     .populate('filter')

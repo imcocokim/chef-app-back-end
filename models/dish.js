@@ -10,7 +10,7 @@ const dishSchema = new Schema({
   yield: String,
   prep: String,
   cook: String,
-  filter: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
+  filters: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
   ingredients: String,
   directions: String,
   notes: String,
