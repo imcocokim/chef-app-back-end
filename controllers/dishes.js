@@ -24,7 +24,7 @@ const index = async (req, res) => {
     const dish = await Dish.find({})
     .populate('filter')
 
-    res.status(201).json(dish)
+    res.status(200).json(dish)
   } catch (err) {
     res.status(500).json(err)
   }
@@ -33,8 +33,8 @@ const index = async (req, res) => {
 const deleteOne = async (req, res) => {
   try {
     const deletedDish = await Dish.findByIdAndDelete(req.params.id)
-    
-    res.status(200).json({ message: 'Dish deleted' }, deletedDish)
+
+    res.status(200).json({ message: 'Dish deleted', deletedDish })
   } catch (err) {
     res.status(500).json(err)
   }
@@ -44,7 +44,8 @@ const update = async (req, res) => {
   try {
     const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .populate('filter')
-    res.json(updatedDish)
+
+    res.status(200).json(updatedDish)
   } catch (err) {
     res.status(500).json(err)
   }
@@ -66,7 +67,7 @@ const updateFilter = async (req, res) => {
       await filter.save()
     }
 
-    res.json(updatedDish)
+    res.status(200).json(updatedDish)
   } catch (err) {
     console.error(err)
     res.status(500).json(err)
@@ -91,7 +92,7 @@ const deleteFilter = async (req, res) => {
     )
     .populate('dishes')
 
-    res.json({ updatedDish, updatedFilter})
+    res.status(200).json({ message: 'Filter deleted from dish and dish deleted from filter', updatedDish, updatedFilter })
   } catch (err) {
     res.status(500).json(err)
   }
