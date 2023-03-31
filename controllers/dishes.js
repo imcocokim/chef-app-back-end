@@ -23,7 +23,7 @@ const index = async (req, res) => {
   try {
     const dish = await Dish.find({})
     .populate('filter')
-    
+
     res.status(201).json(dish)
   } catch (err) {
     res.status(500).json(err)
@@ -33,7 +33,8 @@ const index = async (req, res) => {
 const deleteOne = async (req, res) => {
   try {
     const deletedDish = await Dish.findByIdAndDelete(req.params.id)
-    res.json(deletedDish)
+    
+    res.status(200).json({ message: 'Dish deleted' }, deletedDish)
   } catch (err) {
     res.status(500).json(err)
   }
