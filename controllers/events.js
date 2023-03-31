@@ -1,5 +1,4 @@
 import { Event } from '../models/event.js'
-import { Dish } from '../models/dish.js'
 import { Filter } from '../models/filter.js'
 
 
@@ -77,10 +76,50 @@ const updateFilter = async (req, res) => {
   }
 }
 
+const deleteFilter = async (req, res) => {
+  try {
+    const {eventId, filterId} = req.params
+
+    const updatedEvent = await Event.findOneAndUpdate(
+      {_id: eventId},
+      { $pull: {filters: filterId }},
+      { new: true }
+    )
+    .populate('filters')
+
+    const updatedFilter = await Filter.findOneAndUpdate(
+      { _id: filterId },
+      { $pull: { events: eventId }},
+      { new: true }
+    )
+    .populate('events')
+
+    res.status(200).json({ message: 'Filter deleted from event and event deleted from filter', updatedEvent, updatedFilter})
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+const updateDish = async (req, res) => {
+  try {
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id,
+      { $addToSet: { dishes: req.body.dishes }},
+      { new: true }
+    )
+    .populate('dishes')
+
+    res.status(200).json({ message: 'Dish added to Event', updatedEvent})
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 export {
   create,
   deleteOne as delete,
   index,
   update,
-  updateFilter
+  updateFilter,
+  deleteFilter,
+  updateDish
 }
