@@ -14,6 +14,7 @@ router.get('/', checkAuth, eventsCtrl.index)
 router.put('/:id', checkAuth, eventsCtrl.update)
 router.put('/:id/filter', checkAuth, eventsCtrl.updateFilter)
 router.put('/:id/dish', checkAuth, eventsCtrl.updateDish)
+router.delete('/:eventId/dish/:dishId', checkAuth, eventsCtrl.deleteDish)
 router.delete('/:eventId/filter/:filterId', checkAuth, eventsCtrl.deleteFilter)
 router.delete('/:id', checkAuth, eventsCtrl.delete)
 

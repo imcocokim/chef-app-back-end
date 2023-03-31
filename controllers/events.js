@@ -108,11 +108,32 @@ const updateDish = async (req, res) => {
     )
     .populate('dishes')
 
-    res.status(200).json({ message: 'Dish added to Event', updatedEvent})
+    res.status(200).json({ message: 'Dish added to event', updatedEvent})
   } catch (err) {
     res.status(500).json(err)
   }
 }
+
+const deleteDish = async (req, res) => {
+  try {
+    const { eventId, dishId } = req.params
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      { _id: eventId},
+      { $pull: { dishes: dishId }},
+      { new: true }
+    )
+    .populate('dishes')
+
+    res.status(200).json({ message: 'Dish removed from event', updatedEvent})
+  } catch (err) {
+    console.error(err)
+    res.status(500).json(err)
+  }
+}
+
+
+
 
 export {
   create,
@@ -121,5 +142,6 @@ export {
   update,
   updateFilter,
   deleteFilter,
-  updateDish
+  updateDish,
+  deleteDish
 }
