@@ -10,7 +10,7 @@ const create = async (req, res) => {
       {_id: req.user.profile},
       {$push: {filters: filter}}
     )
-    
+
     res.status(201).json(filter)
   } catch (err) {
     res.status(500).json(err)
@@ -49,9 +49,6 @@ const update = async (req, res) => {
     res.status(500).json(err)
   }
 }
-
-
-
 
 export {
   create,

@@ -23,6 +23,7 @@ const index = async (req, res) => {
   try {
     const dish = await Dish.find({})
     .populate('filter')
+    
     res.status(201).json(dish)
   } catch (err) {
     res.status(500).json(err)

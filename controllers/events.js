@@ -24,10 +24,9 @@ const index = async (req, res) => {
 const deleteOne = async (req, res) => {
   try {
     req.body.author = req.user.profile
-    Event.findByIdAndDelete(req.params.id)
-    .then(deletedEvent => {
-      res.json(deletedEvent)
-    })
+    const deletedEvent = await Event.findByIdAndDelete(req.params.id)
+
+    res.status(200).json(deletedEvent)
   } catch (err) {
     res.status(500).json(err)
   }
