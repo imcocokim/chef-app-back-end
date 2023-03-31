@@ -34,12 +34,11 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    Event.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .populate('restrictions')
     .populate('menu')
-    .then (updatedEvent => {
-      res.json(updatedEvent)
-    })
+
+    res.status(200).json(updatedEvent)
   } catch (err) {
     res.status(500).json(err)
   }
