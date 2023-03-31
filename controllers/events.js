@@ -8,7 +8,7 @@ const create = async (req, res) => {
     req.body.author = req.user.profile
     const event = await Event.create(req.body)
 
-    const filter = await Filter.findById(req.body.restrictions)
+    const filter = await Filter.findById(req.body.filters)
 
     if (!filter.events.includes(event._id)) {
       filter.events.push(event._id)
@@ -24,9 +24,10 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   try {
     const event = await Event.find({})
-    .populate('restrictions')
-    .populate('menu')
-    res.status(201).json(event)
+    .populate('filters')
+    .populate('dishes')
+    
+    res.status(200).json(event)
   } catch (err) {
     res.status(500).json(err)
   }
@@ -46,8 +47,29 @@ const deleteOne = async (req, res) => {
 const update = async (req, res) => {
   try {
     const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    .populate('restrictions')
-    .populate('menu')
+    .populate('filters')
+    .populate('dishes')
+
+    res.status(200).json(updatedEvent)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+const updateFilter = async (req, res) => {
+  try {
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id,
+      { $addToSet: { filters: req.body.filters } },
+      { new: true }
+    )
+    .populate('filters')
+
+    const filter = await Filter.findById(req.body.filters)
+
+    if (!filter.events.includes(updatedEvent._id)) {
+      filter.events.push(updatedEvent._id)
+      await filter.save()
+    }
 
     res.status(200).json(updatedEvent)
   } catch (err) {
@@ -59,5 +81,6 @@ export {
   create,
   deleteOne as delete,
   index,
-  update
+  update,
+  updateFilter
 }
