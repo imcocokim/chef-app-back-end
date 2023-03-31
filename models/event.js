@@ -12,9 +12,9 @@ const eventSchema = new Schema({
   courses: {type: Number, required: true},
   dessert: {type: Boolean, default: false},
   drink: {type: Boolean, default: false},
-  restrictions: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
+  filters: [{ type: Schema.Types.ObjectId, ref: 'Filter' }],
   notes: String,
-  menu: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
+  dishes: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
   isArchived: {type: Boolean, default: false},
   author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
 
