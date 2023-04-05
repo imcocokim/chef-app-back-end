@@ -24,6 +24,7 @@ const index = async (req, res) => {
 
     res.status(200).json(filter)
   } catch (err) {
+    console.err(err)
     res.status(500).json(err)
   }
 }
@@ -42,7 +43,9 @@ const deleteOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const updatedFilter = await Filter.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    const updatedFilter = await Filter.findByIdAndUpdate(req.params.id, 
+      {title: req.body.title}, 
+      {new: true})
     
     res.status(200).json(updatedFilter)
   } catch (err) {
