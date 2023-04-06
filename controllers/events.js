@@ -22,7 +22,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const event = await Event.find({})
+    const event = await Event.find({author:req.user.id})
     .populate('filters')
     .populate('dishes')
     
