@@ -15,7 +15,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const dish = await Dish.find({})
+    const dish = await Dish.find({author:req.user.id})
     .populate('filters')
 
     res.status(200).json(dish)
