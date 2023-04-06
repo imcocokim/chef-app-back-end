@@ -19,7 +19,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const filter = await Filter.find({})
+    const filter = await Filter.find({author:req.user.id})
     .populate(['events', 'author', 'dishes'])
 
     res.status(200).json(filter)
