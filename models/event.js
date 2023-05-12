@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   notes: String,
   dishes: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
   isArchived: {type: Boolean, default: false},
-  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
+  author: { type: Schema.Types.ObjectId, ref: 'Profile' }
 
 },{
   timestamps: true,

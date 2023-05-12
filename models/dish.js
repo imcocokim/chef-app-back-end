@@ -14,7 +14,7 @@ const dishSchema = new Schema({
   ingredients: String,
   directions: String,
   notes: String,
-  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
+  author: { type: Schema.Types.ObjectId, ref: 'Profile' }
 },{
   timestamps: true,
 })

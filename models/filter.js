@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const filterSchema = new Schema({
   title: String,
-  author: [{ type: Schema.Types.ObjectId, ref: 'Profile' }],
+  author: { type: Schema.Types.ObjectId, ref: 'Profile' },
   dishes: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
   events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 },{

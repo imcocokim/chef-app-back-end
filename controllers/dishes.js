@@ -15,14 +15,16 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const dish = await Dish.find({author:req.user.id})
-    .populate('filters')
-
-    res.status(200).json(dish)
+    const dishes = await Dish.find({author: req.user.profile})
+      .populate('filters')
+      .populate('author')
+      
+    res.status(200).json(dishes);
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
-}
+};
+
 
 const deleteOne = async (req, res) => {
   try {
